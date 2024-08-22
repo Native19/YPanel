@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YPanel</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="static/css/uikit.min.css" />
+        <script src="static/js/uikit.min.js"></script>
+        <script src="static/js/uikit-icons.min.js"></script>
+		<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+        <style>
+           body{
+            background-color: black; /* Цвет фона веб-страницы */
+           }           
+        </style>
+    </head>
+    <body>
+        <div class="uk-container uk-background-secondary"  uk-container  uk-height-viewport="expand: true">
+            <div class="uk-text-center  uk-margin-medium uk-margin-remove-left" uk-grid >
+				<tr>
+					<div class="uk-width-1-2 uk-padding-large">
+						<button id="allOn" class="uk-button uk-button-secondary uk-button-large uk-padding-remove-bottom " onclick = "allOnFun()"> All on</button>
+					</div>
+                     
+					<div class="uk-width-1-2 uk-padding-large">
+						<button id="allOff" class="uk-button uk-button-danger uk-button-large uk-padding-remove-bottom" onclick = "allOffFun()">All off</button>
+					</div>
+				</tr>
+				<tr>
+					<div class="uk-width-1-2 uk-padding-large">
+						<button id="allOn" class="uk-button uk-button-secondary" onclick = "allWithoutScreensOnFun()"> all Without Screens On</button>
+					</div>
+                     
+					<div class="uk-width-1-2 uk-padding-large">
+						<button id="allOff" class="uk-button uk-button-danger" onclick = "allWithoutScreensOffFun()">all Without Screens Off</button>
+					</div>
+				</tr>
+				
+            </div>
+			
+			<!-- <div class="uk-text-center  uk-margin-medium uk-margin-remove-left" uk-grid > -->
+
+                 <!-- <div class="uk-width-1-2 uk-padding-large"> -->
+                     <!-- <button id="allOn" class="uk-button uk-button-secondary" onclick = "allWithoutScreensOnFun()"> all Without Screens On</button> -->
+                 <!-- </div> -->
+                     
+                 <!-- <div class="uk-width-1-2 uk-padding-large"> -->
+                    <!-- <button id="allOff" class="uk-button uk-button-danger" onclick = "allWithoutScreensOffFun()">all Without Screens Off</button> -->
+                 <!-- </div> -->
+            <!-- </div> -->
+
+            <table class="uk-table  uk-table-middle " >
+                
+                <thead>
+                    <tr>
+                        <th><span class="uk-text-primary uk-text-lead ">Номер</span></th>
+                        <th><span class="uk-text-primary uk-text-lead">Название</span></th>
+                        <th><span class="uk-text-primary uk-text-lead">Статус</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+					<!--
+                    <tr>
+                        <td><span class="uk-text-primary uk-text-lead">A1-AV01</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Проекторы происхождения Земли</span></td>
+                        <td>
+                            {{ range $key, $value := . }}
+                                <span class="uk-text-primary uk-text-lead">192.168.2.{{ $key }}: <span id="{{ $key }}"> {{ $value }} </span></span> <br/>
+                            {{ end }}
+                        </td>
+
+                        <td>
+                            <button id = "earthOn" class="uk-button uk-button-secondary" type="button">On</button>
+                            <button id = "earthOff"  class="uk-button uk-button-danger" type="button">Off</button>
+                        </td>
+                    </tr>
+					-->
+					
+                    <tr>
+                        <td><span class="uk-text-primary uk-text-lead"> A0-AV02 </span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Экран холла</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "hall"> </span> </span></td>
+                        <td>
+                            <button id="hallOn" class="uk-button uk-button-secondary" type="button" onclick = "hallOnFun()">On</button>
+                            <button id="hallOff" class="uk-button uk-button-danger" type="button" onclick = "hallOffFun()">Off</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span class="uk-text-primary uk-text-lead">D1-AV02</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Экран аквастадиона</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "aqua"></span> </span></td>
+                        <td>
+                            <button id="aquaOn" class="uk-button uk-button-secondary" type="button" onclick = "aquaOnFun()">On</button>
+                            <button id="aquaOff" class="uk-button uk-button-danger" type="button" onclick = "aquaOffFun()">Off</button>
+                        </td>
+                    </tr>
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">A2-AV01</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Капля</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "blob"></span> </span></td>
+                        <td>
+                            <button id="blobOn" class="uk-button uk-button-secondary" type="button" onclick = "blobOnFun()">On</button>
+                            <button id="blobOff" class="uk-button uk-button-danger" type="button" onclick = "blobOffFun()">Off</button>
+                        </td>
+                    </tr>
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">A1-IN04</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Дрейф</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "drift"></span> </span></td>
+                        <td>
+                            <button id="driftOn" class="uk-button uk-button-secondary" type="button" onclick = "driftOnFun()">On</button>
+                            <button id="driftOff" class="uk-button uk-button-danger" type="button" onclick = "driftOffFun()">Off</button>
+                        </td>
+                    </tr>
+					
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">D1-FLOOR</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Интерактивный пол</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "floor"></span> </span></td>
+                        <td>
+                            <button id="floorOn" class="uk-button uk-button-secondary" type="button" onclick = "floorOnFun()">On</button>
+                            <button id="floorOff" class="uk-button uk-button-danger" type="button" onclick = "floorOffFun()">Off</button>
+                        </td>
+                    </tr>
+					
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">A0-ME01</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Пушки холл</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "cannons"></span> </span></td>
+                        <td>
+                            <button id="floorOn" class="uk-button uk-button-secondary" type="button" onclick = "lightCannonesOnFun()">On</button>
+                            <button id="floorOff" class="uk-button uk-button-danger" type="button" onclick = "lightCannonesOffFun()">Off</button>
+                        </td>
+                    </tr>
+					
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">A1-AV03</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Вымирание динозавров</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "dinosaurs"></span> </span></td>
+                        <td>
+                            <button id="dinosaurOn" class="uk-button uk-button-secondary" type="button" onclick = "dinosaurExtinctionOnFun()">On</button>
+                            <button id="dinosaurOff" class="uk-button uk-button-danger" type="button" onclick = "dinosaurExtinctionOffFun()">Off</button>
+                        </td>
+                    </tr>
+					
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">A1-AV04</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Выжившие млекопитающие</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "animals"></span> </span></td>
+                        <td>
+                            <button id="animalsOn" class="uk-button uk-button-secondary" type="button" onclick = "survivingAnimalsOnFun()">On</button>
+                            <button id="animalsOff" class="uk-button uk-button-danger" type="button" onclick = "survivingAnimalsOffFun()">Off</button>
+                        </td>
+                    </tr>
+				
+            <!--					
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">B2-AV06</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Животные арктики</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "jap"></span> </span></td>
+                        <td>
+                            <button id="floorOn" class="uk-button uk-button-secondary" type="button" onclick = "animalOnFun()">On</button>
+                            <button id="floorOff" class="uk-button uk-button-danger" type="button" onclick = "animalOffFun()">Off</button>
+                        </td>
+                    </tr>
+					
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">B4-AV01</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Смешение течений</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "jap"></span> </span></td>
+                        <td>
+                            <button id="floorOn" class="uk-button uk-button-secondary" type="button" onclick = "japOnFun()">On</button>
+                            <button id="floorOff" class="uk-button uk-button-danger" type="button" onclick = "japOffFun()">Off</button>
+                        </td>
+                    </tr
+			-->
+            <!--					
+					<tr>
+                        <td><span class="uk-text-primary uk-text-lead">1111</span></td>
+                        <td><span class="uk-text-primary uk-text-lead">Melo</span></td>
+                        <td><span class="uk-text-primary uk-text-lead"> <span id = "melo"></span> </span></td>
+                        <td>
+                            <button id="floorOn" class="uk-button uk-button-secondary" type="button" onclick = "meloOnFun()">On</button>
+                            <button id="floorOff" class="uk-button uk-button-danger" type="button" onclick = "meloOffFun()">Off</button>
+                        </td>
+                    </tr>
+					           -->
+                </tbody>
+            </table>
+
+            <!--
+            <button id="subscribe" class="uk-button uk-button-secondary" type="button">Subscribe</button>
+            <button id="unsubscribe" class="uk-button uk-button-secondary" type="button">Unsubscribe</button>
+            <button id="sysState" class="uk-button uk-button-secondary" type="button">Get State</button>
+            -->
+        </div>
+		
+		<script>
+		
+		
+		function hallOnFun() {
+			$.ajax({
+				url: 'http://192.168.100.249/cmd.cgi?cmd=REL,2,1',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.100.249/cmd.cgi?cmd=REL,1,1',
+				type: 'POST',              
+			});
+		};		
+		
+		function hallOffFun() {
+			$.ajax({
+				url: 'http://192.168.100.249/cmd.cgi?cmd=REL,2,0',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.100.249/cmd.cgi?cmd=REL,1,0',
+				type: 'POST',              
+			});
+		};
+		
+		function aquaOnFun() {
+			$.ajax({
+				url: 'http://192.168.100.3/cmd.cgi?cmd=REL,1,1',
+				type: 'POST',              
+			});
+		};		
+		
+		function aquaOffFun() {
+			$.ajax({
+				url: 'http://192.168.100.3/cmd.cgi?cmd=REL,1,0',
+				type: 'POST',              
+			});
+		};
+		
+		function blobOnFun() {
+			$.ajax({
+				url: 'http://192.168.2.102/setMainCtrl.cgi?Type=9&SubType=274&Value=1',
+				type: 'POST',              
+			});
+		};
+		
+		function blobOffFun() {
+			$.ajax({
+				url: 'http://192.168.2.102/setMainCtrl.cgi?Type=9&SubType=274&Value=0',
+				type: 'POST',              
+			});
+		};
+		
+		function dinosaurExtinctionOnFun() {
+			$.ajax({
+				url: 'http://192.168.2.52/setMainCtrl.cgi?Type=9&SubType=274&Value=1',
+				type: 'POST',              
+			});
+		};
+		
+		function dinosaurExtinctionOffFun() {
+			$.ajax({
+				url: 'http://192.168.2.52/setMainCtrl.cgi?Type=9&SubType=274&Value=0',
+				type: 'POST',              
+			});
+		};
+		
+		function driftOnFun() {
+			$.ajax({
+				url: 'http://192.168.2.91/setMainCtrl.cgi?Type=9&SubType=274&Value=1',
+				type: 'POST',              
+			});
+		};
+		
+		function driftOffFun() {
+			$.ajax({
+				url: 'http://192.168.2.91/setMainCtrl.cgi?Type=9&SubType=274&Value=0',
+				type: 'POST',              
+			});
+		};
+		
+		function survivingAnimalsOnFun() {
+			$.ajax({
+				url: 'http://192.168.2.21/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:1',
+				type: 'POST',              
+			});
+		};
+		
+		function survivingAnimalsOffFun() {
+			$.ajax({
+				url: 'http://192.168.2.21/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:0',
+				type: 'POST',              
+			});
+		};
+		
+		
+		function floorOnFun() {
+			$.ajax({
+				url: 'http://192.168.7.21/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:1',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.7.22/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:1',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.7.23/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:1',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.7.24/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:1',
+				type: 'POST',              
+			});
+		};		
+		
+		function floorOffFun() {
+			$.ajax({
+				url: 'http://192.168.7.21/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:0',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.7.22/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:0',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.7.23/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:0',
+				type: 'POST',              
+			});
+			$.ajax({
+				url: 'http://192.168.7.24/cgi-bin/webctrl.cgi.elf?&t:26,c:5,p:7,v:0',
+				type: 'POST',              
+			});
+		};
+
+		function japOnFun() {
+			$.ajax({
+				url: 'http://192.168.3.51/setControlMain.cgi?ts=1671077982268&s=63CF31AB46700E27&Source=Webpage&Type=6&SubType=2&Value=2',
+				type: 'GET',              
+			});
+		};		
+		
+		function japOffFun() {
+			$.ajax({
+				url: 'http://192.168.3.51/setControlMain.cgi?ts=1671077711588&s=63CF31AB46700E27&Source=Webpage&Type=6&SubType=4&Value=4',
+				type: 'GET',              
+			});
+		};
+		
+		function animalOnFun() {
+			$.ajax({
+				url: 'http://192.168.1.48/setControlMain.cgi?ts=1671077982268&s=5FEAD0665D22929C&Source=Webpage&Type=6&SubType=2&Value=2',
+				type: 'GET',              
+			});
+		};		
+		
+		function animalOffFun() {
+			$.ajax({
+				url: 'http://192.168.1.48/setControlMain.cgi?ts=1671077711588&s=5FEAD0665D22929C&Source=Webpage&Type=6&SubType=4&Value=4',
+				type: 'GET',              
+			});
+		};
+		
+		function meloOnFun() {
+			$.ajax({
+				url: 'http://192.168.2.64:9999',
+				type: 'POST',
+				dataType: 'json',
+				contentType: "appliacation/json; charset=utf-8",
+				data: JSON.stringlify({jsonrpc: "2.0", method: "system.poweron"}),
+				sucess: function(result) {
+				console.log("++++");}
+			});
+		};		
+		
+		function meloOffFun() {
+			$.ajax({
+				url: 'http://192.168.2.64:9090',
+				type: 'POST',
+				dataType: 'json',
+				contentType: "appliacation/json; charset=utf-8",
+				data: JSON.stringlify({jsonrpc: "2.0", method: "system.poweron"}),
+				sucess: function(result) {
+				console.log("++++");}
+			});
+		};
+		
+		function lightCannonesOnFun() {
+			$.ajax({
+				url: 'http://192.168.100.231/cmd.cgi?cmd=REL,1,1',
+				type: 'POST',              
+			});
+		};
+		
+		function lightCannonesOffFun() {
+			$.ajax({
+				url: 'http://192.168.100.231/cmd.cgi?cmd=REL,1,0',
+				type: 'POST',              
+			});
+		};
+		
+		function allOnFun() {
+			hallOnFun();
+			aquaOnFun();
+			blobOnFun();
+			driftOnFun();
+			floorOnFun();
+			lightCannonesOnFun();
+			dinosaurExtinctionOnFun();
+			survivingAnimalsOnFun();
+		};
+		
+		function allOffFun() {
+			hallOffFun();
+			aquaOffFun();
+			blobOffFun();
+			driftOffFun();
+			floorOffFun();	
+			lightCannonesOffFun();
+			dinosaurExtinctionOffFun();
+			survivingAnimalsOffFun();
+		};
+		
+		function allWithoutScreensOnFun() {
+			blobOnFun();
+			driftOnFun();
+			floorOnFun();
+			lightCannonesOnFun();
+			dinosaurExtinctionOnFun();
+			survivingAnimalsOnFun();
+		};
+		
+		function allWithoutScreensOffFun() {
+			blobOffFun();
+			driftOffFun();
+			floorOffFun();	
+			lightCannonesOffFun();
+			dinosaurExtinctionOffFun();
+			survivingAnimalsOffFun();
+		};
+			
+		</script>
+    </body>
+</html>
